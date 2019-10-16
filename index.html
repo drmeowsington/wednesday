@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+		<title>a Bert for a Bert</title>
+		<style>
+			html, body {
+				margin: 0;
+				padding: 0;
+			}
+			.container {
+				position: fixed;
+				top: 0;
+				left: 0;
+				height: 50px;
+				width: 100%;
+				display: flex;
+			}
+			.container input {
+				flex-grow: 1;
+				border: none;
+				font-size: 20px;
+				padding-left: 20px;
+				background: #ececec;
+			}
+			.container input:focus {
+				border: none;
+				outline: none;
+			}
+			.container input:active {
+				border: none;s
+				outline: none;
+			}
+			.container button {
+				flex-grow: 1;
+				border: none;
+				background: #cccccc;
+			}
+			.results {
+				margin-top: 80px;
+				display: flex;
+			}
+			.results div {
+				flex-grow: 1;
+				text-align: center;
+			}
+			.results img {
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div class="container">
+			<input type="text" maxlength="4"/>
+			<button>OK</button>
+		</div>
+		<div class="results">
+			<div>A<img src="cat-good.svg"/></div>
+			<div>J<img src="cat-bad.svg"/></div>
+			<div>F<img src="cat-half.svg"/></div>
+			<div>Q<img src="cat-half.svg"/></div>
+		</div>
+
+		<script type="text/javascript">
+					
+			var button = document.getElementsByTagName('button')[0];
+			var input = document.getElementsByTagName('input')[0];
+
+			var good = 'cat-good.svg';
+			var bad = 'cat-bad.svg';
+			var half = 'cat-half.svg';
+
+			function printResult(result) {
+				var container = document.getElementsByClassName('results')[0];
+				container.innerHTML = '';
+				for (var counter = 0; counter < result.length; counter++) {
+					var div = document.createElement('div');
+					var text = document.createTextNode(result[counter].value);
+					div.appendChild(text);
+					var img = document.createElement('img');
+					img.src = result[counter].img;
+					div.appendChild(img);
+					container.appendChild(div);
+				}
+			}
+
+			function handleInput() {
+				if (input.value && input.value.length === 4) {
+					var chars = input.value.split('');
+					var result = [];
+					for (var counter = 0; counter < 4; counter++) {
+						var expected = null;
+						if (counter === 0) {
+							expected = 'j';
+						} else if (counter === 2) {
+							expected = 'v';
+						} else {
+							expected = 'a';
+						}
+						if (chars[counter].toLowerCase() === expected) {
+							result.push({ value: chars[counter], img: good });
+						} else if (['j', 'a', 'v'].indexOf(chars[counter].toLowerCase()) >= 0) {
+							result.push({ value: chars[counter], img: half });
+						} else {
+							result.push({ value: chars[counter], img: bad });
+						}
+					}
+					printResult(result);
+				}
+			}
+
+			button.addEventListener('click', handleInput);
+
+		</script>
+
+	</body>
+</html>
