@@ -53,15 +53,10 @@
 	<body>
 
 		<div class="container">
-			<input type="text" maxlength="4"/>
+			<input type="text" maxlength="4" placeholder="----" />
 			<button>OK</button>
 		</div>
-		<div class="results">
-			<div>A<img src="cat-good.svg"/></div>
-			<div>J<img src="cat-bad.svg"/></div>
-			<div>F<img src="cat-half.svg"/></div>
-			<div>Q<img src="cat-half.svg"/></div>
-		</div>
+		<div class="results"></div>
 
 		<script type="text/javascript">
 					
@@ -112,6 +107,7 @@
 			}
 
 			button.addEventListener('click', handleInput);
+
 
 		</script>
 
